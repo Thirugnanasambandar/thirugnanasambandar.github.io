@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Function Should Be Smaller Than That</title>
+</head>
+<body>
+    <h1>Your Funciton Should Be Smaller Than That</h1>
+    <p>The first rule of the function is that they should be smaller. "Clean Code" book by Robert C Martin says that "Your function should be smaller than that". But how much small a function should be or what is the correct size of a function, is always a confusion and I had often seen developers frowning upon this question. As part of this document, I would list down the guidelines to decide whether function is in right size or should be broke down further. </p>
+
+<h3>Function should do only one thing it is supposed to do</h3>
+<p>Function should do only what its name suggest it to do. Function name and logic inside the function should be very tightly coupled. There is 2 aspects here:
+
+Function name should clearly explain the logic handled inside the function
+Function should follow "Single Responsibility" principle
+The purpose of the function should be very explicit from the name and the logic inside the function should not do more than what the name suggests. There should not be any hidden additional logic inside the function. Hidden logic always hinders readability and also maintainability. In general all the functions should follow the "Single responsibility" principle. Single responsibility principle is the first principle in S.O.L.I.D design principles. Some of the advantages of using single responsibility principles are:
+
+<ul>
+    <li>Easy to read/understand</li>
+    <li>Avoids unnecessary/frequent changes</li>
+    <li>Reduces the impact of changes to other parts of the program.</li>
+    <li>Reduces coupling between components which helps to create evolvable code</li>
+    <li>Easy to identify the bugs or bugs would reveal itself.</li>
+    <li>Easy to scale</li>
+    <li>Avoids code duplication</li>
+</ul>
+</p>
+</body>
+</html>
