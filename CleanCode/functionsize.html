@@ -5,27 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Function Should Be Smaller Than That</title>
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <h1>Your Funciton Should Be Smaller Than That</h1>
     <p>The first rule of the function is that they should be smaller. "Clean Code" book by Robert C Martin says that "Your function should be smaller than that". But how much small a function should be or what is the correct size of a function, is always a confusion and I had often seen developers frowning upon this question. As part of this document, I would list down the guidelines to decide whether function is in right size or should be broke down further. </p>
 
-<h3>Function should do only one thing it is supposed to do</h3>
-<p>Function should do only what its name suggest it to do. Function name and logic inside the function should be very tightly coupled. There is 2 aspects here:
 
-Function name should clearly explain the logic handled inside the function
-Function should follow "Single Responsibility" principle
-The purpose of the function should be very explicit from the name and the logic inside the function should not do more than what the name suggests. There should not be any hidden additional logic inside the function. Hidden logic always hinders readability and also maintainability. In general all the functions should follow the "Single responsibility" principle. Single responsibility principle is the first principle in S.O.L.I.D design principles. Some of the advantages of using single responsibility principles are:
+    <div>
+        <h3>Function should do only one thing it is supposed to do</h3>
+        <p>Function should do only what its name suggest it to do. Function name and logic inside the function should be very tightly coupled. There is 2 aspects here:
 
-<ul>
-    <li>Easy to read/understand</li>
-    <li>Avoids unnecessary/frequent changes</li>
-    <li>Reduces the impact of changes to other parts of the program.</li>
-    <li>Reduces coupling between components which helps to create evolvable code</li>
-    <li>Easy to identify the bugs or bugs would reveal itself.</li>
-    <li>Easy to scale</li>
-    <li>Avoids code duplication</li>
-</ul>
-</p>
+            Function name should clearly explain the logic handled inside the function
+            Function should follow "Single Responsibility" principle
+            The purpose of the function should be very explicit from the name and the logic inside the function should not do more than what the name suggests. There should not be any hidden additional logic inside the function. Hidden logic always hinders readability and also maintainability. In general all the functions should follow the "Single responsibility" principle. Single responsibility principle is the first principle in S.O.L.I.D design principles. Some of the advantages of using single responsibility principles are:
+
+            <ul>
+                <li>Easy to read/understand</li>
+                <li>Avoids unnecessary/frequent changes</li>
+                <li>Reduces the impact of changes to other parts of the program.</li>
+                <li>Reduces coupling between components which helps to create evolvable code</li>
+                <li>Easy to identify the bugs or bugs would reveal itself.</li>
+                <li>Easy to scale</li>
+                <li>Avoids code duplication</li>
+            </ul>
+            <div class="citation">Functions should do one thing. It should do it well. They should do it only (Ref. Clean Code by Robert C. Martin)</div>
+            <div class="citation">If you try to explain your function logic in brief words and if your explanation is "function does this and that" then "this" has to be a separate function and "that" has to be a separate function. </div>
+        </p>
+    </div>
+
+    <div>
+        <h3>Should be a Maximum 2 levels of Indentation</h3>
+        <p>
+            Function should contain only maximum 2 levels of code Indentation. It would be great, if the code indentation level is 1. But most of the time a simple "if" comparison or "for" loop pushes it to 2  levels which cannot be further avoided. If there is more than 2 level of Indentation then move the 2nd level indentation logic to separate function. This helps gives us below benefits:
+
+            <ul>
+                <li>Improves readability</li>
+                <li>Reduces cyclomatic complexity of the function</li>
+                <li>Easy to test and have high code coverage</li>
+                <li>Establishes "Single Responsibility" principle</li>
+            </ul>
+        </p>
+    </div>
+    
+    <div>
+        <h3>Should be less than 10 lines</h3>
+        <p>Sometimes even when the code indentation is 1 level or 2 levels, we could end up having a bigger function. Code is never easy to read when the function has more lines as the reader has to remember lots of code to understand the complete logic. Try to group related lines or related functions into a separate function, so when the developer reads the code from top-down, he doesn't have read through vast lines of code and instead he can read through the function names to understand logic. In other words, create abstraction by moving related logics to a separate function. When the reader wants to look at the details of any function, then he can deep dive into that function code but most of the time high level information provided by the function name should be suffice. So enable easy readability by using smaller functions.</p>
+
+        <p>In the previous example of GetProcessedPatientsData(), reader has to go through only 2-3 lines to understand the logic when he skims through the code. If he decides to understand the processing then he can deep dive into ProcessPatientData(). But with FetchPatientsData(), he has go through 7-8 lines of code to understand the logic. This is a small function, so it will not be an issue to go through 7-8 lines but when function is bigger then it will definitely hinder readability. </p>
+    </div>
+
+    <div>
+        <h3>Function should have minimum number of arguments</h3>
+        <p>Argument is at a different level of abstraction than the function name and it forces the reader to know the detail at the point which is not needed. Readers have to interpret the arguments each time they read it. Also it's difficult to understand which argument is input or output unless a strict nomenclature is followed around naming the variables. Ideal number of arguments for a function is zero but its not possible most of the time, so developer should try their level best to keep it very minimum.</p>
+            
+        <p>Some of the suggestions to reduce or unnecessary arguments are:
+            
+            <ul>
+                <li>Instead of passing reference variable to enable method to set the value, use return statements. Eg: String getFooter() is better than includeFooter(String data)</li>
+                <li>Break the method if there is a big list of arguments</li>
+                <li>Avoid flag arguments and instead create separate functions to handle the actions to be taken based on the flag value. More details: <a href="https://martinfowler.com/bliki/FlagArgument.html">MartinFlower-FlagArgument</a> </li>
+            </ul> 
+        </p>
+    </div>
+    
 </body>
 </html>
