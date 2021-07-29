@@ -31,6 +31,30 @@ body {
     display: block;
     padding: 20px 50px 20px 50px;
     background-color: black;
-    margin: 25px 20% 25px 50px;
+    margin: 0px 20% 25px 50px;
     color: azure;
+}
+
+.codeblockheader {
+    display: block;
+    padding: 3px 10px 3px 10px;
+    background-color:#E0E0E0;
+    margin: 25px 20% 0px 50px;
+    color: black;
+    border-style: solid;
+    border-color: darkgrey;
+    border-bottom-style: none;
+    border-right-style: none;
+    font-family: monospace;
+}
+
+.codeblockheader .title {
+    padding: 0px 25px 0px 0px;
+    text-align: left;
+}
+
+.codeblockheader .lang {
+    padding: 0px 25px 0px 0px;
+    text-align: right;
+    float: right
 }

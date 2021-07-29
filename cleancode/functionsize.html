@@ -34,7 +34,7 @@
         </p>
         <p>
             Example: FetchData() method doing both fetching and processing.
-
+            <span class="codeblockheader"><span class="title">Title: Unrefactored Code</span><span class="lang">Language: Perl</span></span>
             <code class="codeblock">
                 sub FetchStudentsData {<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;my @StudentsDataSet = //SQL Query to retrieve the data;<br>
@@ -51,6 +51,7 @@
         </p>
         <p>
             Here FetchData is doing 2 actions - Fetching and Processing. This function will has to be tested extensively when either query changes or processing changes.  This is very small function so readability is not an issue here but readability is a big problem when the function is big and incorporates complex logic. <i>Small functions doing multiple things might not have readability issue but it will definitely impact scalability/evolution.</i> 
+            <span class="codeblockheader"><span class="title">Title: Refactored Code</span><span class="lang">Language: Perl</span></span>
             <code class="codeblock">
                 sub GetProcessedStudentsData {<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;my @StudentsDataSet = FetchStudentsDataFromDB();<br>
@@ -134,6 +135,7 @@
         </p>
         <p>
             <i>Example: One of famous nested loop implementation is Bubble sort. Usual implementation of bubble sort looks like below.</i>
+            <span class="codeblockheader"><span class="title">Title: Unrefactored Code</span><span class="lang">Language: Perl</span></span>
             <code class="codeblock">
                 void bubbleSort(int arr[], int n)<br>
                 {<br>
@@ -147,6 +149,7 @@
 
             <p>
                 Let us refactor the bubble sort function to remove nested loop.
+                <span class="codeblockheader"><span class="title">Title: Refactored Code</span><span class="lang">Language: Perl</span></span>
                 <code class="codeblock">
                     void bubbleSort(int intArr[], int len)<br>
                     {<br>
@@ -187,6 +190,7 @@
         </p>
         <p>
             Example: Below code identifies the fruits which are present more than 1.
+            <span class="codeblockheader"><span class="title">Title: Unrefactored Code</span><span class="lang">Language: Perl</span></span>
             <code class="codeblock">
                 my @fruits= (ban, ban, ban , apple, cherry, apple);<br>
                 sub GetAndPrintDuplicateItems {<br>
@@ -204,6 +208,7 @@
         </p>
         <p>
             In the above example, it's not easy to the foreach and grep statements as they are coupled. A better refactored code will look like below:
+            <span class="codeblockheader"><span class="title">Title: Refactored Code</span><span class="lang">Language: Perl</span></span>
             <code class="codeblock">
                 my @fruits= (ban, ban, ban , apple, cherry, apple);<br>
                 &nbsp;<br>
