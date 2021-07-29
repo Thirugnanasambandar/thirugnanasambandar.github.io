@@ -32,6 +32,56 @@
             <div class="citation">Functions should do one thing. It should do it well. They should do it only (Ref. Clean Code by Robert C. Martin)</div>
             <div class="citation">If you try to explain your function logic in brief words and if your explanation is "function does this and that" then "this" has to be a separate function and "that" has to be a separate function. </div>
         </p>
+        <p>
+            Example: FetchData() method doing both fetching and processing.
+
+            <code class="codeblock">
+                sub FetchStudentsData {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;my @StudentsDataSet = //SQL Query to retrieve the data;<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;foreach my $data(@StudentsDataSet) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$data->{DOB} = strftime("%M%DY", $data->{DOB});<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$data->{FullName} = $data->{FirstName}." ".$data->{LastName};<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$data->{Age} = GetDifferentInYears($data->{DOB}, Today());<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return \@StudentDataSet;<br>
+                }<br>
+            </code>
+        </p>
+        <p>
+            Here FetchData is doing 2 actions - Fetching and Processing. This function will has to be tested extensively when either query changes or processing changes.  This is very small function so readability is not an issue here but readability is a big problem when the function is big and incorporates complex logic. <i>Small functions doing multiple things might not have readability issue but it will definitely impact scalability/evolution.</i> 
+            <code class="codeblock">
+                sub GetProcessedStudentsData {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;my @StudentsDataSet = FetchStudentsDataFromDB();<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;ProcessStudentsData(\@PatietsDataSet);<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return \@StudentsDataSet;<br>
+                }<br>
+                &nbsp;<br>
+                sub FetchStudentsDataFromDB {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;@StudentsDataSet = //SQL Query to retrieve the data;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp; <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return @StudentsDataSet;<br>
+                }<br>
+                &nbsp;<br>
+                sub ProcessStudentData {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;my ($StudentsDataSet) = @_;<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;foreach my $patientdata (@$StudentsDataSet) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FormatDOB($patientdata);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SetFullName($patientdata);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SetAge($patientdata);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                }<br>
+                &nbsp;<br>
+                sub FormatDOB {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp; $patient->{DOB} = strftime("%M%DY", $patient->{DOB});<br>
+                }<br>
+                ....<br>
+            </code>
+        </p>
     </div>
 
     <div>
@@ -79,8 +129,45 @@
                 <li>Hinders readability</li>
                 <li>Increases cyclomatic complexity</li>
                 <li>Decreases testability</li>
-                <li>Second level loop can be always moved to a separate function. </li>
             </ul>
+            Second level loop can be always moved to a separate function.
+        </p>
+        <p>
+            <i>Example: One of famous nested loop implementation is Bubble sort. Usual implementation of bubble sort looks like below.</i>
+            <code class="codeblock">
+                void bubbleSort(int arr[], int n)<br>
+                {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int i, j;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (i = 0; i < n-1; i++)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (j = 0; j < n-i-1; j++)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (arr[j] > arr[j+1])<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swap(&arr[j], &arr[j+1]);<br>
+                }
+            </code>
+
+            <p>
+                Let us refactor the bubble sort function to remove nested loop.
+                <code class="codeblock">
+                    void bubbleSort(int intArr[], int len)<br>
+                    {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int cur;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (i = 0; i < len-1; i++)   <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; fixLastMinusIElement(intArr, len-i);<br>
+                    }<br>
+                    void fixLastMinusIElement(int intArr[], int len)<br>
+                    {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;int j;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for (j = 0; j < len-1; j++)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sortCurAndNextElement(arr, j)<br>
+                    }<br>
+                    &nbsp;<br>
+                    void sortCurAndNextElement(int arr[], int curInd)<br>
+                    {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if (arr[curInd] > arr[curInd+1])<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swap(&arr[curInd], &arr[curInd+1]);<br>
+                    }<br>                    
+                </code>
+            </p>
         </p>
     </div>
     <div>
@@ -97,6 +184,57 @@
                 <li>Easy to scale</li>
                 <li>Improves re-usability</li>
             </ul>
+        </p>
+        <p>
+            Example: Below code identifies the fruits which are present more than 1.
+            <code class="codeblock">
+                my @fruits= (ban, ban, ban , apple, cherry, apple);<br>
+                sub GetAndPrintDuplicateItems {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;my %fruitscount;<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;foreach my $fruit(@fruits) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$fruitscount{$fruit}++;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;my @dups = grep { $fruitscount{$_} > 1 } keys %fruitscount;<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;print @dups;<br>
+                }<br>
+            </code>
+        </p>
+        <p>
+            In the above example, it's not easy to the foreach and grep statements as they are coupled. A better refactored code will look like below:
+            <code class="codeblock">
+                my @fruits= (ban, ban, ban , apple, cherry, apple);<br>
+                &nbsp;<br>
+                sub GetCountOfUniqItem {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;foreach my $fruit(@fruits) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$fruitscount{$fruit}++;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return \%fruitscount;<br>
+                }<br>
+                &nbsp;<br>
+                sub GetItemsWithCountGrtrThanOne {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;my ($fruitscount) = @_;<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return grep { $fruitscount->{$_} > 1 } keys %fruitscount;<br>
+                }<br>
+                &nbsp;<br>
+                sub GetDuplicateItems {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;my $fruitscount = GetCountOfUniqItem();<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return GetItemsWithCountGrtrThanOne($fruitscount);<br>
+                }<br>
+                &nbsp;<br>
+                sub PrintItems {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;my ($items) = @_;<br>
+                &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;print $items;<br>
+                }<br>
+                &nbsp;<br>
+                my $dupitems = GetDuplicateItems();<br>
+                PrintItems($items)<br>
+            </code>
         </p>
     </div>
     <div>

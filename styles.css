@@ -12,6 +12,7 @@ h2 {
 h3{
     color: rgb(24, 8, 70);
 }
+
 .citation {
     border-style: none none none solid;
     border-left-width: 5px;
@@ -24,4 +25,12 @@ h3{
 
 body {
     margin: 75px;
+}
+
+.codeblock {
+    display: block;
+    padding: 20px 50px 20px 50px;
+    background-color: black;
+    margin: 25px 20% 25px 50px;
+    color: azure;
 }
