@@ -69,5 +69,56 @@
         </p>
     </div>
     
+    <div>
+        <h3>
+            No Nested If and Loops
+        </h3>
+        <p>
+            Nested loop and nested if statements are always BIG NO. Some of the reasons are avoiding them are:
+            <ul>
+                <li>Hinders readability</li>
+                <li>Increases cyclomatic complexity</li>
+                <li>Decreases testability</li>
+                <li>Second level loop can be always moved to a separate function. </li>
+            </ul>
+        </p>
+    </div>
+    <div>
+        <h3>Code should be Unit testable</h3>
+        <p>
+            Modularise the logic into a function such that all the logic inside the function is easily unit testable. In most of the cases, unit tests are given less importance and only very few cases are tested. Developers always tends to catch the remaining scenarios in later testing phases. This habit eventually affects both code quality and also project timeline due to endless debugging. Many hours of debugging can be avoided if functions are unit tested properly with positive, negative and edge cases. Unit test should always have 100% coverage. Though 100% test coverage is a much needed, it alone cannot ensure the code is working fine. Sometimes a simple positive case itself could give 100% coverage when the function is smaller. Developers have to understand the need and advantages of unit testing and do a comprehensive testing by including positive, negative and edge cases to uncover the issues.
+        </p>
+        <p>
+            In the refactored code, each functionality can be unit tested easily. Below are the benefits of writing a code considering the testability aspect:
+
+            <ul>
+                <li>Bugs reveal themselves and it will be difficult for bugs to hide</li>
+                <li>Easy to read and understand</li>
+                <li>Easy to scale</li>
+                <li>Improves re-usability</li>
+            </ul>
+        </p>
+    </div>
+    <div>
+        <h3>Final thoughts:</h3>
+        <p>
+            Creating smaller functions might initially looks difficult as we would have been used to creating bigger functions. But it can be easily achieved with practice and even it improves the thought process to come up with logic of a problem in longer run. Developers might feel like creating smaller functions would make extrapolated number of functions. Benefits reaped for maintaining smaller functions always outweighs the issue of having more functions.
+            
+            <br><br>
+            Overall summary of benefits of smaller functions:
+            <ul>
+                <li>Easy to read/understand</li>
+                <li>Easy to maintain</li>
+                <li>Avoids unnecessary/frequent changes</li>
+                <li>Reduces the impact of changes to other parts of the program.</li>
+                <li>Reduces coupling between components which helps to create evolvable code</li>
+                <li>Easy to identify the bugs or bugs would reveal itself</li>
+                <li>Increases testability</li>
+                <li>Easy to scale</li>
+                <li>Avoids code duplication</li>
+                <li>Less cyclomatic complexity</li>
+            </ul>   
+        </p>
+    </div>
 </body>
 </html>
