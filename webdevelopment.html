@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="webdevelopment.css">
+</head>
+<body>
+    <h1>Web Development</h1>
+
+    <h3>RGBA</h3>
+    <div class="propdetails">
+        Transpareny & Opacity of back-ground color property using the method rgba(red, green, blue, alpha). This property valuue doesn't font and other overlapping elements but only the bg color of cuurrent element.
+        <ul>
+            <li>Red/Green/Blue Values ranges from 0-255</li>
+            <li>Alpha value ranges from 0 to 1. Eg: 0 is 0% opactiy. 1 is 100% opacity</li>
+        </ul>
+        Below example for opacity propery. Outer box is 'section' and inner boxes are 'div'. 
+        <ul>
+            <li>Div1 is having Alpha value as '1' (i.e. 0% transparency/100% opacity)</li>
+            <li>Div2 is having Alpha value as '0' (i.e. 100% transparency/0% opacity)</li>
+            <li>Div3 is having Alpha value as '.7' (i.e. 30% transparency/70% opacity)</li>
+        </ul>
+        <section class="rgbaopacitysection">  
+            <div id="rgbadiv1" class="rgbaopacitydiv">Text
+            </div>
+            <div id="rgbadiv2" class="rgbaopacitydiv">Text
+            </div>
+            <div id="rgbadiv3" class="rgbaopacitydiv">Text
+            </div>
+        </section>
+    </div>
+    <h3>Opacity</h3>
+    <div class="propdetails">
+        Opacity of the container, its content and decendents can be controlled using 'opacity' property.
+        Opacity values range from 0 to 1. 0 is 0% opacity or 100% transparent whereas 1 is 100% opacity or 0% transparent.
+        RGBA doesn't affect the content or descendants but opacity afftects both.<br>
+
+        Below example for opacity propery. Outer box is 'section' and inner boxes are 'div'. 
+        <ul>
+            <li>Div1 is having opacity value as '1' (i.e. 0% transparency/100% opacity)</li>
+            <li>Div2 is having opacity value as '0' (i.e. 100% transparency/0% opacity)</li>
+            <li>Div3 is having opacity value as '.7' (i.e. 30% transparency/70% opacity)</li>
+        </ul>
+        <section class="rgbaopacitysection">  
+            <div id="opacitydiv1" class="rgbaopacitydiv">Text
+            </div>
+            <div id="opacitydiv2" class="rgbaopacitydiv">Text
+            </div>
+            <div id="opacitydiv3" class="rgbaopacitydiv">Text
+            </div>
+        </section>
+    </div>
+</body>
+</html>
