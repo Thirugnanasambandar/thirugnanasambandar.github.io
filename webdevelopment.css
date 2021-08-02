@@ -1,3 +1,4 @@
+/*  Properties related to RGBA and OPACITY */
 .rgbaopacitysection {
     width: 700px;
     height: 100px;
@@ -42,4 +43,19 @@
 
 .propdetails {
     margin: 0px 5% 0px;
+}
+
+/*  Properties related to POSITION */
+
+.positiondiv {
+    width: 100px;
+    height: 100px;
+    background-color: #3d405b;
+    border: 2px solid black;
+    margin: 10px;
+    display: inline-block;
+}
+
+#positionmiddlediv {
+    background-color: #81b29a;
 }
