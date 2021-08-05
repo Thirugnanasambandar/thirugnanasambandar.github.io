@@ -27,7 +27,7 @@ h3{
 }
 
 body {
-    margin: 75px;
+    margin: 50px 75px 50px 75px;
 }
 
 .codeblock {
@@ -60,4 +60,23 @@ body {
     padding: 0px 25px 0px 0px;
     text-align: right;
     float: right
+}
+
+.inline-block {
+    display: inline-block;
+    margin: 2px 1px 2px 2%;
+}
+.headernavspan {
+    display: inline-block;
+    margin: 10px;
+}
+
+.header {
+    float: right;
+}
+.liblock {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    line-break: 1px;
 }
