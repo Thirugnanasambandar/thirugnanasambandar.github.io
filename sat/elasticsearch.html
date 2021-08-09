@@ -7,7 +7,7 @@
     <title>Elasticsearch</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
+<body style="background-color: rgb(199, 251, 234);">
     <div class="header">
         <header>
             <nav>
@@ -16,20 +16,71 @@
             </nav>
         </header>
     </div>
-    <h1>Elasticsearch</h1>
-    <p>Elasticsearch is a distributed, open source, search and analytics engine for all types of data, including textual, numerical, structured and unstructured. It's a RESTful application. Elasticsearch is built on Apache Lucne and it's famous for speed and scalability.
-
-    <h4 class="inline-block">Speed:</h4> Elasticsearch uses inverted indices for full text querying, BKD trees for storing numertic and geo data, and a column store for analytics.<br>
-    <h4 class="inline-block">Scalability:</h4> Run it on your laptop or huundreds of server with petabytes of data. Single node runs the same way as your in a 300-node cluster.<br>
-    <h4 class="inline-block">Relevance</h4> Can handle complex typos and ranks the search results based on variety of factors from frequencty or recency to popularity and beyond.<br>
-    <h4 class="inline-block">Resiliency</h4> Detects failures to keep your cluster safe and available. Operates on a distributed environment.<br>
-    </p>
+    <h1>ELK Stack</h1>
     <p>
-        <h3>UseCases:</h3>
+        ELK is the acronym for Elasticsearch, Logstash and Kibana.
+    </p>
+    <div>
+        <img src="./elasticsearch/Logstash.png" alt="Logstach picture" class="floatright">
+        <h3>Elasticsearch</h3>
+        <p>
+            Elasticsearch/Elastic stack is a distributed, open source, search and analytics engine for all types of data, including textual, numerical, structured and unstructured. It's a RESTful application. Elasticsearch is built on Apache Lucne and it's famous for speed and scalability.
+            <h4 class="inline-block">Speed:</h4> Elasticsearch uses inverted indices for full text querying, BKD trees for storing numeric and geo data, and a column store for analytics.<br>
+            <h4 class="inline-block">Scalability:</h4> Run it on your laptop or huundreds of server with petabytes of data. Single node runs the same way as your in a 300-node cluster.<br>
+            <h4 class="inline-block">Relevance</h4> Can handle complex typos and ranks the search results based on variety of factors from frequencty or recency to popularity and beyond.<br>
+            <h4 class="inline-block">Resiliency</h4> Detects failures to keep your cluster safe and available. Operates on a distributed environment.<br>
+        </p>
+        <h3>Kibana:</h3>
+        <p>
+            Its an analytics and visualization platform. Kibana can be treated as elastic search dashboard, providing line chart, pie chart and many others. Multiple dashboards can be created for different dashboards. It can be also used to search the elasticsearch logs.
+        </p>
+        
+        <h3>Logstash:</h3> 
+        <p>
+            Its a data processing pipeline use to send the information to elasticsearch. Logstash has evolved to support multiple applications other than elasticsearh in recent times. Data logstash receives are treated as events and these events can be sent multiple destinations like elasticsearch, email, kafka. Logstash has 3  parts. 1. Inputs, 2. Filters and 3. output olugins.
+        </p>
+        <br>
+        <div  class="centerimage "><b>Logstash => Ingestion &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Elasticsearch => Searching &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kibana => Visualization</b></div>
+        <img src="./elasticsearch/ELKStackPicture.png" alt="Elasticsearch LogStash Kibala flow picture" class="centerimage">
+        <br>
+    </div>
+    <p>
+        Elasticsearch is the heart of elastic stack but elastic stack so most of the time Elastic stack is refereed as Elasticsearch. Elastic stack includes other tools which is optionally used with elasticsearch. Below are those components of elastic stack:
+
+        <div class="liblock">
+            <ul>
+                <li>
+                    <h4>X-Pack:</h4> Provides authentication and authorization for Kibana and Elastic search. Supports LDAP and roll based configuration. It also providesalerting. Reports can be generated automatically or manually. X-Pack also provides Machine learning feature.
+                </li>
+                <li>
+                    <h4>Graph:</h4> Identify relevance between the data. Integrated into applications using API and also can be visualized using Kibana.
+                </li>
+                <li>
+                    <h4>SQL:</h4> Elasticsearch queries are written using Query DSL(proprietery Query language). But DSL is very verbose. So Elasticsearch SQL provides an API to write SQL query and it internally converts into Query DSL.
+                </li>
+                <li>
+                    <h4>Beats:</h4> Beats are data shippers. They basically contain bunch of light weight tools which can be installed in your application to send data to Logstash or Elasticsearch.
+                    <ul>
+                        <li><b>FileBeat:</b> Used to collect log files from Apache webserver or MySQL or Kibana or Postgres and send it to Elasticsearch.</li>
+                        <li><b>MtricBeat:</b> Collects system and service information E.g. CPU and Memory usages</li>
+                        <li><b>PacketBeat:</b> Colelcts network data E.g. Http Requests</li>
+                        <li><b>WinLogBeat:</b> Collects Windows Log Events</li>
+                        <li><b>AuditBeat:</b> Collects audit data from Linux</li>
+                        <li><b>HeartBeat:</b> Monitors Service Uptime</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </p>
+    <br>
+    <p>
+        <h3>Applications of elastic search:</h3>
         <ol>
             <li>
                 <div class="liblock">
-                    <h4 class="inline-block">Logging: </h4> Provides fast and scalable logging with out-of-the-box support for the common data sources(Kubernetes, Apache, EC2, MySQL, Windows, etc.). Index your data into elasticsearch and visualize it all in Kibana in minutes.
+                    <h4 class="inline-block">Logging: </h4> ELK is the acronym for Elasticsearch, Logstash and Kibana. 
+                    
+                    <p>Provides fast and scalable logging with out-of-the-box support for the common data sources(Kubernetes, Apache, EC2, MySQL, Windows, etc.). Index your data into elasticsearch and visualize it all in Kibana in minutes.</p>
                     Some of the out-of-the-box features provided for logging are listed below:
                     <ul>
                         <li>Tail a file directly in the UI</li>
@@ -40,21 +91,65 @@
                 </div>
             </li>
             <li>
-                <h4 class="inline-block">Metrics: </h4> Monitor and viisualize the system metrics in one place. Metricbeat module will help to get started in minutes to track Kubernetes orchestratioin or prometheus-style metrics.
-                <ul>
-                    <li>Deep dive into metrics to compare current and historical CPU/memory/network traffic time series data.</li>
-                    <li>Consolidate data from hundreds of Prometheus server and acheve global view and analyze them in Kibana. Metricbeat can be connected to the Prometheus server.</li>
-                    <li>Search across high cardinality data with the visualization</li>
-                </ul>
+                <div class="liblock">
+                    <h4 class="inline-block">Metrics: </h4> Monitor and visualize the system metrics in one place. Metric beat module will help to get started in minutes to track Kubernetes orchestratioin or prometheus-style metrics.
+                    <ul>
+                        <li>Deep dive into metrics to compare current and historical CPU/memory/network traffic time series data.</li>
+                        <li>Consolidate data from hundreds of Prometheus server and acheve global view and analyze them in Kibana. Metricbeat can be connected to the Prometheus server.</li>
+                        <li>Search across high cardinality data with the visualization</li>
+                    </ul>
+                </div>
             </li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>
+                <div class="liblock">
+                    <h4 class="inline-block">Application Performance monitoring(APM):</h4> Monitor application metrics to identify where your applicaiton is spending time.
+                    <ul>
+                        <li>By providing one stop solution for reports, transactions, logs and metrics, it makes the root cause analysis easier.</li>
+                        <li>Detect anamolies or anamolous response times by enabling machine learning-based anamoly detection feature</li>
+                        <li>Get alerted based on severity or threshold. Get notifications via email, slack, etc.</li>
+                        <li>Supports most of the popular programming language applications.</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="liblock">
+                    <h4 class="inline-block">Service Uptime: </h4> Monitor uptime and react to availability issues across  apps and services.
+                    <ul>
+                        <li>Active monitoring with custom alerting options</li>
+                        <li>Supports multistep check validation</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="liblock">
+                    <h4 class="inline-block">Site Search: </h4> provides the tools to build powerful site search. Provides web crawling and searching feature.
+                    <ul>
+                        <li>Capture content changes automatically</li>
+                        <li>Flexibility to manually reindex specific pages</li>
+                        <li>Analysse search behavior in real time from built-in analytics dashboards.</li>
+                        <li>Deliver faster and better results using elastic search </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="liblock">
+                    <h4>App Search:</h4> provides focused power of elastic search to apps with redefined set of APIs and intutive dashboards.
+                    <ul>
+                        <li>Easy to create indexes and start searcching</li>
+                        <li>Provides real-time data and actionable insights</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="liblock">
+                    <h4>Map:</h4> Explore geospatial data with Elastic maps.
+                </div>
+            </li>
+            <li>
+                <div class="liblock">
+                <h4>Endpoint Security:</h4> Stops malware and ransomwares. Drives centralizedhunting and detectio/
+                </div>
+            </li>
         </ol>
     </p>
 </body>

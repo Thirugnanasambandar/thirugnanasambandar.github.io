@@ -64,7 +64,7 @@ body {
 
 .inline-block {
     display: inline-block;
-    margin: 2px 1px 2px 2%;
+    margin: 3px 1px 3px 2%;
 }
 .headernavspan {
     display: inline-block;
@@ -78,5 +78,31 @@ body {
     display: block;
     margin-bottom: 5px;
     margin-top: 5px;
-    line-break: 1px;
+}
+
+.liblock ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.liblock li  {
+    margin-top: 3px;
+    margin-bottom:3px;
+}
+
+.centerimage {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 75%;
+}
+
+.floatright {
+    height: 350px;
+    width: 600px;
+    float: right;
+    margin: 20px;
 }
