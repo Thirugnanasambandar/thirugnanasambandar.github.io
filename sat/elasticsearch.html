@@ -21,10 +21,19 @@
         ELK is the acronym for Elasticsearch, Logstash and Kibana.
     </p>
     <div>
-        <img src="./elasticsearch/Logstash.png" alt="Logstach picture" class="floatright">
+        
         <h3>Elasticsearch</h3>
         <p>
             Elasticsearch/Elastic stack is a distributed, open source, search and analytics engine for all types of data, including textual, numerical, structured and unstructured. It's a RESTful application. Elasticsearch is built on Apache Lucne and it's famous for speed and scalability.
+            It is basically a document store like MongoDB. Data is stored as "Schema-less"  JSON objects (like No SQL documents). It provides near real-time search (meaning there is only a small latency from a document is indexed untill it is searchable).
+            
+            <div>
+                <br> <i> Communication to server is done through HTTP REST API. </i>
+                <span class="codeblockheader"><span class="title">Title: Unrefactored Code</span><span class="lang">Language: Shell</span></span>
+                <code class="codeblock">
+                    curl =X {REST Verb (GET/POST)} {Node}:{Port}/{Index}/{Type}/{ID}
+                </code>
+            </div>
             <h4 class="inline-block">Speed:</h4> Elasticsearch uses inverted indices for full text querying, BKD trees for storing numeric and geo data, and a column store for analytics.<br>
             <h4 class="inline-block">Scalability:</h4> Run it on your laptop or huundreds of server with petabytes of data. Single node runs the same way as your in a 300-node cluster.<br>
             <h4 class="inline-block">Relevance</h4> Can handle complex typos and ranks the search results based on variety of factors from frequencty or recency to popularity and beyond.<br>
@@ -35,13 +44,23 @@
             Its an analytics and visualization platform. Kibana can be treated as elastic search dashboard, providing line chart, pie chart and many others. Multiple dashboards can be created for different dashboards. It can be also used to search the elasticsearch logs.
         </p>
         
-        <h3>Logstash:</h3> 
-        <p>
-            Its a data processing pipeline use to send the information to elasticsearch. Logstash has evolved to support multiple applications other than elasticsearh in recent times. Data logstash receives are treated as events and these events can be sent multiple destinations like elasticsearch, email, kafka. Logstash has 3  parts. 1. Inputs, 2. Filters and 3. output olugins.
-        </p>
+        
+            
+        <div style="display: flex;">
+        <span>
+            <h3>Logstash:</h3> 
+            <p>
+                Its a data processing pipeline use to send the information to elasticsearch. Logstash has evolved to support multiple applications other than elasticsearh in recent times. Data logstash receives are treated as events and these events can be sent multiple destinations like elasticsearch, email, kafka. Logstash has 3  parts. 1. Inputs, 2. Filters and 3. output olugins.
+            </p>
+        </span>
+            <img src="./elasticsearch/Logstash.png" alt="Logstach picture" class="floatright">
+        </div>
+
         <br>
         <div  class="centerimage "><b>Logstash => Ingestion &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Elasticsearch => Searching &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kibana => Visualization</b></div>
-        <img src="./elasticsearch/ELKStackPicture.png" alt="Elasticsearch LogStash Kibala flow picture" class="centerimage">
+        <figure>
+            <img src="./elasticsearch/ELKStackPicture.png" alt="Elasticsearch LogStash Kibala flow picture"class="centerimage">
+        </figure> 
         <br>
     </div>
     <p>
@@ -153,4 +172,11 @@
         </ol>
     </p>
 </body>
+<footer>
+    <div>
+        <ul>
+            <li><a href="./elasticsearch/invertedindex.html">Inverted Index</a></li>
+        </ul>
+    </div>
+</footer>
 </html>

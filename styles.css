@@ -97,7 +97,7 @@ body {
     margin-right: auto;
     margin-top: 25px;
     margin-bottom: 25px;
-    width: 75%;
+    width: 50%;
 }
 
 .floatright {
@@ -105,4 +105,8 @@ body {
     width: 600px;
     float: right;
     margin: 20px;
+}
+
+footer {
+    margin-top: 100px;
 }
