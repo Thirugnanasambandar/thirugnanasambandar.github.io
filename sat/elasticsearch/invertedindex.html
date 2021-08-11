@@ -5,8 +5,103 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inverted Index</title>
+    <link rel="stylesheet" href="../../styles.css">
 </head>
 <body>
+    <div class="header">
+        <header>
+            <nav>
+                <span class="headernavspan"><a href="../../index.html">Home</a></span>
+                <span class="headernavspan"><a href="../elasticsearch.html">Parent</a></span>
+            </nav>
+        </header>
+    </div>
     <h1>Inverted Index</h1>
+    <p>
+        Inverted index is a datastructure to stores the documents for faster and effecient retrival of data based on keywords search. Say for example we want to retrieve all the documents containing thee keyword 'Pizza', elasticsearch would work perfectly for such scenarios.
+        It is a most popular data structure used in document retrival systems like search engine. Its very dynamic and has less latency to make a document available for testing from the time of adding document.
+    </p>
+    <h3>How Does It Work?</h3>
+    <p>
+        Inverted index parses each document and creates the indexes of each word and their occurence in the documents.
+
+        <br>Consider the below sentences:
+        <pre>
+            <ul>
+                <li><b>Document 1:</b> Car is a four wheeler</li>
+                <li><b>Document 2:</b> Jeep has four wheel drive</li>
+                <li><b>Document 3:</b> Car is available in both automatic and manual drive modes</li>
+                <li><b>Document 4:</b> Jeep is available only in manual drive mode</li>
+                <li><b>Document 5:</b> Car enthusiasts prefer manual dirve mode cars</li>
+            </ul>
+        </pre>
+
+        <p>
+            Each docment is parsed and a posting list will be created with each keyword as key and the list of document ids in which the keyword is appearing as value like below:
+            <table>
+                <thead>
+                    <tr><th  colspan="2">Posting List</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Car</td> <td>(1, 3, 4)</td></tr>
+                    <tr><td>is</td> <td>(1, 3, 4)</td></tr>
+                    <tr><td>a</td><td>(1)</td></tr>
+                    <tr><td>four</td><td>(1, 2)</td></tr>
+                    <tr><td>wheeler</td><td>(2)</td></tr>
+                    <tr><td>Jeep</td><td>(2, 3)</td></tr>
+                    <tr><td>has</td><td>(2)</td></tr>
+                    <tr><td>wheel</td><td>(1)</td></tr>
+                    <tr><td>drive</td><td>(2, 3, 4, 5)</td></tr>
+                    <tr><td>modes</td><td>(3)</td></tr>
+                    <tr><td>available</td><td>(3, 4)</td></tr>
+                    <tr><td>in</td><td>(3, 4)</td></tr>
+                    <tr><td>both</td><td>(3)</td></tr>
+                    <tr><td>automatic</td><td>(3)</td></tr>
+                    <tr><td>and</td><td>(3)</td></tr>
+                    <tr><td>manual</td><td>(3, 4, 5)</td></tr>
+                    <tr><td>mode</td><td>(4, 5)</td></tr>
+                    <tr><td>only</td><td>(4)</td></tr>
+                    <tr><td>enthusiasts</td><td>(5)</td></tr>
+                    <tr><td>prefer</td><td>(5)</td></tr>
+                    <tr><td>cars</td><td>(5)</td></tr>
+                </tbody>
+            </table>
+            <p>Using this approach, we have create a data dictionary for all the keywords in documents.</p>
+            
+            <p>
+                <h3>Steps to Creat Inverted Index:</h3>
+                Above explanation is just high level idea, building an inverted index would need below steps to match the strings correctly:
+                <ul>
+                    <li><b>Parse the document: </b> Parse the document and identify unique words.</li>
+                    <li><b>Remove stop words: </b> Stop words are most occuring and useless words in document like "a", "an", "I", "we, "then", "has", "have", etc.</li>
+                    <li><b>Stemming: </b> Identify the root words for plural words(cars will be treated as car), adjectives and tenses(ran will be converted to run)</li>
+                    <li><b>Add the words to data dictionary: </b> Final list of words will be added to data dictionary with entry for the document id</li>
+                </ul>
+            </p>
+
+            <p>
+                Final data structure for the above documents might look like below after following all the steps:
+                <table>
+                    <thead>
+                        <tr><th  colspan="2">Posting List</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Car</td> <td>(1, 3, 4, 5)</td></tr>
+                        <tr><td>four</td><td>(1, 2)</td></tr>
+                        <tr><td>wheeler</td><td>(2)</td></tr>
+                        <tr><td>Jeep</td><td>(2, 3)</td></tr>
+                        <tr><td>wheel</td><td>(1)</td></tr>
+                        <tr><td>drive</td><td>(2, 3, 4, 5)</td></tr>
+                        <tr><td>mode</td><td>(3, 4, 5)</td></tr>
+                        <tr><td>available</td><td>(3, 4)</td></tr>
+                        <tr><td>automatic</td><td>(3)</td></tr>
+                        <tr><td>manual</td><td>(3, 4, 5)</td></tr>
+                        <tr><td>enthusiasts</td><td>(5)</td></tr>
+                        <tr><td>prefer</td><td>(5)</td></tr>
+                    </tbody>
+                </table>
+            </p>
+        </p>
+    </p>
 </body>
 </html>
