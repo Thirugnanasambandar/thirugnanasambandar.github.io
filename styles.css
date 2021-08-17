@@ -136,3 +136,33 @@ th, td {
     padding: 3px 20px 3px 20px;
     border-radius: 3px;
 }
+
+.containersection {
+    background-color: #edf2fb;
+    margin: 50px auto;
+    border: 5px solid #edf2fb;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.Scontainersection {
+    width: 90%;
+    height: 300px;
+}
+
+.Mcontainersection {
+    width: 90%;
+    height: 500px;
+}
+
+.containersection div {
+    height: 80%;
+    flex-basis: 25%;
+    background-color: #99c1de;
+}
+
+.containersection li {
+    margin: 1em;
+}
