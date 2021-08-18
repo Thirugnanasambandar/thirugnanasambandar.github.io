@@ -7,7 +7,7 @@
     <title>BKD Trees</title>
     <link rel="stylesheet" href="../../styles.css">
 </head>
-<body>
+<body style="font-size: 20px;">
     <div class="header">
         <header>
             <nav>
@@ -18,10 +18,10 @@
     </div>
     <h1>BKD Trees</h1>
     <p>
-        BKD stands for Binary K-Dimensional trees. It draws few characteristics from Binary Search Tree(BST), K-Dimensional Tree and also B+ trees.
+        BKD stands for Binary K-Dimensional(K-D) trees. It draws few characteristics from Binary Search Tree(BST), K-Dimensional Tree and also B+ trees.
         Below are the overview of characteristics drawn from these data structurues:
     </p>
-    <section class="Scontainersection containersection">
+    <section class="Mcontainersection containersection">
         <div>
             <h4 style="text-align: center;">K-D Tree</h4>
             <ul>
@@ -32,8 +32,10 @@
         <div>
             <h4 style="text-align: center;">Binary Search Tree</h4>
             <ul>
+                <li>Each node can  maximum 2 childs</li>
+                <li>Its balanced tree with height difference between left and subtree at any node is not greater than 1.</li>
                 <li>like BST leverages the capability of divide and search the space by 2 at each node for traversal.</li>
-                <li>Divide & search by 2 is also the prooperty of K-D trees. BKD inherets it from K-D trees</li>
+                <li>All the above properties are inhereted by K-D trees. BKD inherets it from K-D trees</li>
             </ul>
         </div>
         <div>
@@ -44,5 +46,186 @@
             </ul>
         </div>
     </section>
+    <p>
+        BKD tree is extension of K-D tree so let us begin with understanding K-D tree. K-D tree or K-Dimensional trees are capable of multiple dimensions where as binary is capable of handling only one dimension. Common example for multiple dimension is co-ordinates which stores latitude and longitude.
+        K-D trees are simillar to BST but they are capable of handling multiple dimention. So during search, each traversal is able to divide a particular dimension into 2 and search like BST.
+
+
+        <img src="./Multi dimension slicing.png" alt="Multi dimension slicing" class="centerimage">
+
+        Above figure, is representation of a 2D structure. 'A' was identified by splitting the X axis into 2 and E & F were identified by splitting 'A' further. 
+
+
+        Let us start with understanding 2D tree for simplicity. Below is the example of a 2D(x and y) KD tree. 
+        
+        <section class="invisiblecontainersection" style="height: 600px; flex-direction: column; flex-wrap: wrap;">
+            <img src="./KD-2dimensionaltree.png" alt="K-D 2 Dimensional Tree" class="leftimage">
+            <div>
+                <p>
+                    Each level in the above tree deals with one dimension. 
+                    <p>Level 0 deals with dimension 1(x Axis)</p>
+                    <p>Level 1 deals with dimension 2(Y Axis)</p>
+                    <p>Level 2 deals with dimension 1(X Axis) and so on in round robin </p>
+                </p> <br>
+                <p class="liblock">
+                    Node addition to the tree happens as follows:
+                    <ul>
+                        <li>
+                            (10,90) goes into root as tree is empty
+                        </li>
+                        <li>
+                            (8,70) addition: goes into left node of root as 8 < 10
+                        </li>
+                        <li>
+                            (9,65) addition: 9 < 10 so goes to left of root and 65 < 70 so it goes to left of (8,70)
+                        </li>
+                        <li>
+                            (7,90) additoin: 7 < 10 so goest to left of root and 90 > 70 so it goes to right of (8,70) 
+                        </li>
+                        <li>
+                            (10,75) addition: 10 == 10 so goes to the right of the root
+                        </li>
+                        <li>(11,50) addition: 11 > 10 so goes to right the root and 50 < 75 so it goes to left of (10,73)</li>
+                        <li>(12,80) addition: 12 > 10 and 80 > 75 so it goes to right of (10,73)</li>
+                        <li>(11,77) addition: 11 > 10, 74 < 75 and 707 > 50 so it goes to right of (11,50)</75></li>
+                    </ul>
+                </p> 
+            </div>
+        </section>
+        
+        
+
+        
+        <p>Below is mapping between node level and dimension it will be dealing with for different KD trees.</p>
+
+        <div class="invisiblecontainersection" style="background-color: white;">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">2 Dimensional BKD Tree</th>
+                    </tr>
+                    <tr>
+                        <th>Level</th><th>Dimension</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>0(Root)</td><td>1</td></tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">3 Dimensional BKD Tree</th>
+                    </tr>
+                    <tr>
+                        <th>Level</th><th>Dimension</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0(Root)</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">4 Dimensional BKD Tree</th>
+                    </tr>
+                    <tr>
+                        <th>Level</th><th>Dimension</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0(Root)</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="citation">
+            Dimension to be dealt at Level X = Level % N
+            <p>Level - is X level of the Tree</p>
+            <p>N - Number of dimensions</p>
+        </div>
+
+
+
+    </p>
 </body>
 </html>

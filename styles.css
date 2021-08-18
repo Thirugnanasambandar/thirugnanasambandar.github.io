@@ -100,6 +100,17 @@ body {
     width: 50%;
 }
 
+.leftimage {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 50%;
+    float: left;
+}
+
 .floatright {
     height: 350px;
     width: 600px;
@@ -145,16 +156,15 @@ th, td {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    width: 80%;
 }
 
 .Scontainersection {
-    width: 90%;
     height: 300px;
 }
 
 .Mcontainersection {
-    width: 90%;
-    height: 500px;
+    height: 600px;
 }
 
 .containersection div {
@@ -165,4 +175,12 @@ th, td {
 
 .containersection li {
     margin: 1em;
+}
+
+.invisiblecontainersection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-across;
+    align-items: center;
+    width: 80%;
 }
