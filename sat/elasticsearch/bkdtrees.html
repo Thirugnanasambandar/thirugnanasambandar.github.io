@@ -32,8 +32,8 @@
         <div>
             <h4 style="text-align: center;">Binary Search Tree</h4>
             <ul>
-                <li>Each node can  maximum 2 childs</li>
-                <li>Its balanced tree with height difference between left and subtree at any node is not greater than 1.</li>
+                <li>Each node can have maximum 2 childs</li>
+                <li>It's a balanced tree with height difference between left and subtree at any node is not greater than 1.</li>
                 <li>like BST leverages the capability of divide and search the space by 2 at each node for traversal.</li>
                 <li>All the above properties are inhereted by K-D trees. BKD inherets it from K-D trees</li>
             </ul>
@@ -46,9 +46,10 @@
             </ul>
         </div>
     </section>
+    <h3>K-D Tree</h3>
     <p>
-        BKD tree is extension of K-D tree so let us begin with understanding K-D tree. K-D tree or K-Dimensional trees are capable of multiple dimensions where as binary is capable of handling only one dimension. Common example for multiple dimension is co-ordinates which stores latitude and longitude.
-        K-D trees are simillar to BST but they are capable of handling multiple dimention. So during search, each traversal is able to divide a particular dimension into 2 and search like BST.
+        BKD tree is extension of K-D tree so let us begin with understanding K-D tree. K-D tree or K-Dimensional trees are capable of handling multiple dimensions where as binary is capable of handling only one dimension. Common example for multiple dimension is 'co-ordinates' which stores latitude and longitude.
+        K-D trees are simillar to BST but they are capable of handling multiple dimension. So during search, each traversal is able to divide a particular dimension into 2 and search like BST.
 
 
         <img src="./Multi dimension slicing.png" alt="Multi dimension slicing" class="centerimage">
@@ -224,8 +225,26 @@
             <p>N - Number of dimensions</p>
         </div>
 
-
-
+        <h5>Disadvantages of K-D Tree</h5>
+        <p>
+            <ul>
+                <li>Complex to balance the tree</li>
+                <li>As each node can store its data, there is no constraints on how a large amounts of data can be stored. Which causes memory in-efficiency.</li>
+            </ul>
+        </p>
     </p>
+    <br>
+    <h3>BKD Tree</h3>
+
+    <p>
+        BKD tree tries to solve both the space and time in-efficiency of KD tree. BKD tree is made up of multiple K-D trees but the data is stored only in leaf nodes like B+ tree. So this reduces frequent balancing and improves the memory utilization as the data will be stored in a continous block, so it will easy to cache.
+    </p>
+    <p>
+        Below is the pictorial representation of BKD tree:
+        <img src="./BKD Tree.png" alt="BKD Tree Diagram" class="centerimage">
+    </p>
+
+    Internal nodes are used to store pointers to reach appropriate blocks and they must follow a complete binary tree. Nodes doesnt have to store the pointers also as left child will be always 2i and right child will be 2i+1 for a node at position i. As nodes will not contain value, it will be easy to store in cache and also as most of the elements will be stored only in leaf node, tree height will be always minimal.
+
 </body>
 </html>
