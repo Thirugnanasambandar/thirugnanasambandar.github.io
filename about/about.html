@@ -187,7 +187,7 @@
             <ul>
               <li>
                 <b>Federated Decision Services(FDS):</b>
-                Objective of FDS is to expose Billing engine's knowledge as small DMN engine microservices in previous phases of Revenue cycle to reduce time and avoid unwanted dependencies. 
+                Objective of FDS is to expose Billing engine's knowledge as micro decision services in previous phases of Revenue cycle to reduce time and avoid unwanted dependencies. 
                 <p>
                   <br><b>22.3: </b>Enterprise grade microservices needs non-functional requirements like monitoring, audit, logging, error handling and analytics. To simplify the enterprise grade microservice creation, we spent 22.3 creating SDK for aNet to simply the logic to implement decision sevice call and a SDK for microservices called rules-platform to simplfy spinnning up a decision services.
                   <br><b>22.7: </b>Implemented Decision service called Coding Scrub to evaluate the coding details in Billing workflow's charge entry page. Also onboarded 2 customers for microservices SDK (ECR and CRS)
@@ -197,7 +197,7 @@
               <li>
                 <p>
                   <b>Kanban:(21.11-22.11)</b>
-                  Objective of this stream is to respond to rule update/addition request in DMN engine. Work colloboratively with business team to make them comfortable with doing DMN changes and also implement pre-processor & post processor plugins when ever needed.
+                  Objective of this stream is to respond to rule update/add request in DMN engine within TAT. Work colloboratively with business team to make them comfortable with doing DMN changes and also implement pre-processor & post processor plugins when ever needed.
                 </p>
               </li>
               <li>
@@ -221,11 +221,12 @@
                 <li>
                   <b>Ecosystem Stream:</b>
                   <p>
-                    As Rules2 project reachitectures legacy rule engine into DMN engine, it demanded new unique identifier equivalent to legacy rule engine's claim rule id.
+                    As Rules2.0 project re-achitectures the legacy rule engine into DMN engine, it demanded new unique identifier equivalent to legacy rule engine's claim rule id.
                     As part of ecosystem work stream, 
                     <ol>
                       <li>Did changes to new introduce new unique identifier called Business Requirement ID(BRID) for DMN Engine rules</li>
                       <li>Changes in workflow tool and anet code base to use BRID</li>
+                      <li>Propagate BRID information from intranet to anet</li>
                       <li>Introduced rules transfromation life cycle to graciously retire the rules in legacy rule engine</li>
                       <li>Worked with 30+ teams who are current consumers of claim rule id to adapt BRID</li>
                     </ol>
@@ -239,7 +240,7 @@
                 </li>
                 <li>
                   <b>Kanban:</b>
-                  Handle rule addition/update requests within TAT.
+                  Handle rule addition/update requests within TAT. Developed tools and defined processes to turn around the tasks within TAT.
                 </li>
               </ul>
             </p>
@@ -277,7 +278,7 @@
             <h4>2017:</h4>
             <p>
               <b>Advanced Rules Configuration Page(ARC):</b>
-              For RHC/FQHC/PBC practices, we have to create special set of rules to enable speciality billing for them. This was a blocker to onboard more than 4 practices in a month as we had to create and test the rules to onboard them for speciality billing. ARC page lets BIZ team configure the billing criterea for speciality billing. For each configuration in ARC page, there will be a corresponding global rule to take action based on the configured value. This reduced the overhead to onboard new specialty billing customers.
+              For RHC/FQHC/PBC practices, we have to create special set of rules to enable speciality billing for them. Since lots of time was spent to create and test these rules, we were onboarding only limited practices for sepciality billing every month. ARC page lets BIZ team configure the billing criterea for speciality billing. For each attribute in ARC page, there will be a corresponding global rule to take action based on the configured value. This reduced the overhead to onboard new specialty billing customers.
               Single handedly designed and implemented the ARC page.
             </p>
             <h4>2016-2017:</h4>
