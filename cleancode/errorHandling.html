@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <header>
+            <nav>
+                <span class="headernavspan"><a href="../index.html">Home</a></span>
+                <span class="headernavspan"><a href="../cleancode.html">Parent</a></span>
+            </nav>
+        </header>
+    </div>
+    <h1>Error Handling</h1>
+   <p>
+        Error handling is one of the inevitable component of programming. Things can go wrong at any point and when it happens, program should be capable of handling the error and avoid cranshing.
+        Error handling has 2 parts -  1. Logging enough information for debugging and 2. Handling of the error in appropriate manner.
+    </p>
+    <h3>Use Exceptions Rather than Return Codes</h3>
+    <p>
+        Many old programming languages didnt have exceptions. Rather error code has to be returned to calling function which inturn should handle the error.
+        If there are multiple errors to be handled then the  code will be cluttered with if else logic. It's easy to forget a scenario or two while handling the  errors manually.
+        Also this stye of code hinders the readability of the code.
+    </p>
+    <h3>Write Try-Catch-Finally Statement First</h3>
+    <p>
+        Try blocks are like transactions. Catch statements ensures that process leaves the code in consistent, no matter what happens in the try.
+        It's a good practice to start with <i>try-catch-finally</i> statement when you are writing code that could throw exceptions. 
+        This helps you define what the user of that code should except, no matter what goes wrong with the code that is eexected in the try.
+
+        After defining try-catch-finally block, use TDD to build up on the rest of the logic that is needed. Try to wirte tests that force exceptions, and then add behaviour to your handle to  staisfy your tests.
+    </p>
+    <h3>Use Unchecked Exceptions</h3>
+    <p>
+        Price of checked exception is an Open/Closed principle violation. 
+        If you throw a checked exception from a method in your code and the catch is 3 levels above, you must declare that exception in the signature of each mentod between you and the catch. This means that a change at a low level of the software can force changes on many higher levels.
+        
+    </p>
+    <h3>Provide Context with Exceptions</h3>
+    <p>
+        Each exception that you throw should provide enough context to determine the source and location of the error. Expcetion should explaiin the intent of the operation that failed. Always create informative error messages.
+    </p>
+    <h3>Wrap 3-rd party API</h3>
+    <p>
+        Create a wrapper for third party API calls and throw custom error rather than throwing third party API errors directly. 
+        <ul>
+            <li>This will minimize the dependencies upon it. We can choose to move to a different library in the future without much penalty.</li>
+            <li>Wrapping also makes it easier to modk out third-party calls when you are testing your own code.</li>
+            <li>Finally, you aren't tied to a particular venor's API design choices. You can define an API that you are comfortable with.</li>
+        </ul>
+        Often a single exception class is fine for a particular area of code. The information sent with the exception can distinguish the errors. User different exception classes only if there are scenarios when you want to catch one exception and allow the other one to pass through.
+    </p>
+    <h3>Define the Normal flow</h3>
+    <p>
+        If you follow the advices in preceeding section, error handling will be pushed to the edge of the code. But be wary of using the exception catch block to handle edge cases like below:
+        <span class="codeblockheader"><span class="title">Title: Business logic in Exception Class</span><span class="lang">Language: Java</span></span>
+            <code class="codeblock">
+                try {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;MealExpenses expenses = expenseRerportDAO.getMeals(employee.getID());<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;m_total += expenses.getTotal();<br>
+                } catch(MealExpensesNotFound e) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;m_total += getMealPerDiem();<br>
+                }<br>
+            </code>
+        
+        In this business, if meals are expensed, they become part of the total. If they aren’t, the employee gets a meal per diem amount for that day. The exception clutters the logic. Wouldn’t it be better if we didn’t have to deal with the special case? If we didn’t, our code would look much simpler. It would look like this:
+        <span class="codeblockheader"><span class="title">Title: Refactored Code</span><span class="lang">Language: Java</span></span>
+        <code class="codeblock">
+            MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());<br>
+            m_total += expenses.getTotal();<br>
+        </code>
+
+        if expenseReportDAO can return Perdiem rate when meals are not expensed, then the whole code becomes more clean.
+    </p>
+    <h3></h3>
+    <h3>Don't Return Null</h3>
+    <p>
+        Discussion about error handling is never complete without Null pointer exceptions. This would be on top of the table for primary reasons for errors and it would be the most handled scenario. Handling null for each step causes 2 things:
+        <ul>
+            <li>Make the code cluttered and hampers readability</li>
+            <li>If we miss one scenario to handle null then code throw runtime NullPointer exception</li>
+        </ul>
+        So how do we avoid this? Easy thing to do is avoid returning null values. Instead of null, we can return empty list if caller is expecting a list or empty object if caller is expecting a object.
+    </p>
+    <h3>Don't Pass Null</h3>
+    <p>
+        Returning null from methods is bad, but passing null into methods is worse. Unless you are working with an API which expects you to pass null, you should avoid passing null in your code whenever possible.
+        <br>But how to handle when null is passed? 
+        <br>Most appropriate way is to use <b>@NotNull</b> validations or <b>"assertion"</b> if programming language doesnt provide similar capabilities as @NotNull annotations.
+    </p>
+    <h3>Conclusion</h3>
+    <p>
+
+Conclusion
+Clean code is readable, but it must also be robust. These are not conflicting goals. We can write robust clean code if we see error handling as a separate concern, something that is viewable independently of our main logic. To the degree that we are able to do that, we can reason about it independently, and we can make great strides in the maintainability of our code.
+    </p>
+</body>
+</html>
