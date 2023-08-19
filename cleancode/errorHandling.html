@@ -18,7 +18,8 @@
     <h1>Error Handling</h1>
    <p>
         Error handling is one of the inevitable component of programming. Things can go wrong at any point and when it happens, program should be capable of handling the error and avoid cranshing.
-        Error handling has 2 parts -  1. Logging enough information for debugging and 2. Handling of the error in appropriate manner.
+        Error handling has 2 parts -  1. Logging enough information for debugging and 2. Handling of the error in appropriate manner. This page describes few techniques and considerations that 
+        you can use to write code that is both clean and robust—code that handles errors with grace and style.
     </p>
     <h3>Use Exceptions Rather than Return Codes</h3>
     <p>
@@ -28,9 +29,9 @@
     </p>
     <h3>Write Try-Catch-Finally Statement First</h3>
     <p>
-        Try blocks are like transactions. Catch statements ensures that process leaves the code in consistent, no matter what happens in the try.
+        Try blocks are like transactions. Catch statements ensures that process leaves the code in consistent state, no matter what happens in the try.
         It's a good practice to start with <i>try-catch-finally</i> statement when you are writing code that could throw exceptions. 
-        This helps you define what the user of that code should except, no matter what goes wrong with the code that is eexected in the try.
+        This helps you define what the user of that code should except, no matter what goes wrong with the code that is executed in the try.
 
         After defining try-catch-finally block, use TDD to build up on the rest of the logic that is needed. Try to wirte tests that force exceptions, and then add behaviour to your handle to  staisfy your tests.
     </p>
