@@ -24,8 +24,10 @@
     <h3>Use Exceptions Rather than Return Codes</h3>
     <p>
         Many old programming languages didnt have exceptions. Rather error code has to be returned to calling function which inturn should handle the error.
-        If there are multiple errors to be handled then the  code will be cluttered with if else logic. It's easy to forget a scenario or two while handling the  errors manually.
+        If there are multiple errors to be handled then the code will be cluttered with if else logic to handle different error codes. It's easy to forget a scenario or two while handling the errors codes.
         Also this stye of code hinders the readability of the code.
+
+        Using exceptions rather than error codes will keep the code clean and simple.
     </p>
     <h3>Write Try-Catch-Finally Statement First</h3>
     <p>
@@ -43,15 +45,15 @@
     </p>
     <h3>Provide Context with Exceptions</h3>
     <p>
-        Each exception that you throw should provide enough context to determine the source and location of the error. Expcetion should explaiin the intent of the operation that failed. Always create informative error messages.
+        Each exception that you throw should provide enough context to determine the source and location of the error. Exception should explain the intent of the operation that failed. Always create informative error messages.
     </p>
     <h3>Wrap 3-rd party API</h3>
     <p>
         Create a wrapper for third party API calls and throw custom error rather than throwing third party API errors directly. 
         <ul>
             <li>This will minimize the dependencies upon it. We can choose to move to a different library in the future without much penalty.</li>
-            <li>Wrapping also makes it easier to modk out third-party calls when you are testing your own code.</li>
-            <li>Finally, you aren't tied to a particular venor's API design choices. You can define an API that you are comfortable with.</li>
+            <li>Wrapping also makes it easier to mock out third-party calls when you are testing your own code.</li>
+            <li>Finally, you aren't tied to a particular vendor's API design choices. You can define an API that you are comfortable with.</li>
         </ul>
         Often a single exception class is fine for a particular area of code. The information sent with the exception can distinguish the errors. User different exception classes only if there are scenarios when you want to catch one exception and allow the other one to pass through.
     </p>
