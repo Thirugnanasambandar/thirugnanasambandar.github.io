@@ -98,34 +98,5 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;//Assert<br>
             }<br>
         </code>
-        <span class="codeblockheader"><span class="title">Sample of Good Test case</span><span class="lang">Language: Java</span></span>
-        <code class="codeblock">
-            @Test<br>
-            @DisplayName("Test Era File Create API - Valid Payload(Postive Case) - Download Entry Created")<br>
-            void testerafilecreate_whenValidDetailsPassed_createDBEntry() throws Exception {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;//Arrange - Create Data<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;UUID uuid = UUID.randomUUID();<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;String createPayload = "{\"filename\":\"TestFile\",\"filesource\":\"optumpay\",\"creator\":\"claimtracking\"}";<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;RequestBuilder requestBuilder = getRequestBuilder(createPayload);<br><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;//Arrange - Mocks<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;when(downloadsCatalogService.createERADownloadEntry(eraDownloadCatalogCreateRequestDTO)).thenReturn(uuid);<br><br>
-                &nbsp;&nbsp;&nbsp;&nbsp; //Act<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();<br><br>
-        
-                &nbsp;&nbsp;&nbsp;&nbsp;//Assert<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Assertions.assertEquals(HttpStatus.CREATED.value(), <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mvcResult.getResponse().getStatus(), <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Incorrect HTTP Status Code(" + mvcResult.getResponse().getStatus() + ") returned"<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;);<br>
-            }<br><br><br>
-        
-            private static RequestBuilder getRequestBuilder(String createPayload) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1/downloadscatalog/eras/create")<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.contentType(MediaType.APPLICATION_JSON)<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.accept(MediaType.APPLICATION_JSON)<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.content(createPayload);<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;return requestBuilder;<br>
-            }<br>
-        </code>
     </body>
 </html>
