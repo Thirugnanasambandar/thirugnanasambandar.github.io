@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Hanlding</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="header">
+        <header>
+            <nav>
+                <span class="headernavspan"><a href="../index.html">Home</a></span>
+                <span class="headernavspan"><a href="../cleancode.html">Parent</a></span>
+            </nav>
+        </header>
+    </div>
+    <h1>Unit Tests Are Not 2nd Class Citizen!!!</h1>
+    <p>
+        Most of the time unit tests are treated as second class citizens compared to production code. The care, time and effort spent to production is not spent for writing unit tests. There were merely written to pass the coverage threshold of Sonar gate validation.
+
+        Some of the purpose and benefits of clean unit tests are:
+        <ul>
+            <li>Making sure code is working as intended</li>
+            <li>Helps to understand the code better</li>
+            <li>Maintains the integrity of the code</li>
+        </ul>
+
+        <div class="citation">
+            Code integrity is not just about the correctness of the code, but also about developers’ confidence regarding correctness of their code. With code integrity, the developer can be sure that his/her code is written correctly when passed on to QA. This is, in fact, the expected quality level of the code. Code integrity helps developers and companies release better products, with fewer bugs, in a shorter time.
+        </div>
+    </p>
+
+    <h3>UnClean Tests Disadvantages:</h3>
+    <p>
+        Unclean tests are equivalent to, if not worse than, having no tests!!
+
+        The problem is that tests must change as the production code evolves. The dirtier the tests, the harder they are to change. The more tangled the test code, the more likely it is that you will spend more time cramming new tests into the suite than it takes to write the new production code. As you modify the production code, old tests start to fail, and the mess in the test code makes it hard to get those tests to pass again. So the tests become viewed as an ever-increasing liability.
+
+        Unclean tests in long run become overhead to do even small changes. Eventually, we start to maintain tests to keep up with sonar gate validations rather than to ensure correctiveness of the code and use other modes of testing to ensure correctiveness of the code. This brings uncertainity to ensure code is working good.
+    </p>
+
+    <h3>Clean tests Advantages:</h3>
+    <p>
+        Test code is just as important as production code. It is not a second-class citizen. It requires thought, design, and care same as production code. It must be kept as clean as production code.
+        If you don’t keep your tests clean, you will lose them.  It is unit tests that keep our code flexible, maintainable, and reusable. The reason is simple. If you have tests, you do not fear making changes to the code! Without tests every change is a possible bug. No matter how flexible your architecture is, no matter how nicely partitioned your design, without tests you will be reluctant to make changes because of the fear that you will introduce undetected bugs.
+        Indeed, you can improve that architecture and design without fear!
+    </p>
+
+    <h3>Clean Tests!!</h3>
+    <p>What makes a clean test? Three things. Readability, readability, and readability. Read- ability is perhaps even more important in unit tests than it is in production code. What makes tests readable? The same thing that makes all code readable: clarity, simplicity, and density of expression. In a test you want to say a lot with as few expressions as possible.</p>
+
+        Some of the properties of Clean test:
+        <ul>
+            <li><h4>Uses Domain-Specific Testing Language:</h4> Test should be using domain specific terms rather than pure technical terms</li>
+            <li><h4>Efficiency:</h4> Unit tests doesnt have to be as efficient as production code. After all, it runs in a test environment, not a production environment, and those two environment have very different needs. But test has to be fast.</li>
+            <li><h4>1 Assert per Test:</h4> This may sound as a draconian rule. But keeping the Asserts minimal helps to improve readability. If 1 assert is not possible, try to keep the assert count less.</li>
+            <li><h4>Test a single concpet in each test:</h4> A thumb rule to follow is that we want to test a single concept in each test function.  It's not good to have long test functions that go testing one miscellaneous thing after another.     
+                Below snippet is an example of such a test. This test should be split up into three independent tests because it tests three independent things. Merging them all together into the same function forces the reader to figure out why each section is there and what is being tested by that section.
+            <span class="codeblockheader"><span class="title">Test multiple scenarios in 1 test</span><span class="lang">Language: Java</span></span>
+            <code class="codeblock">
+                /*** Miscellaneous tests for the addMonths() method. */<br>
+                public void testAddMonths() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;SerialDate d1 = SerialDate.createInstance(31, 5, 2004);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;SerialDate d2 = SerialDate.addMonths(1, d1);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(30, d2.getDayOfMonth());<br> 
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(6, d2.getMonth()); <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(2004, d2.getYYYY());<br>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;SerialDate d3 = SerialDate.addMonths(2, d1);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(31, d3.getDayOfMonth());<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(7, d3.getMonth());<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(2004, d3.getYYYY());<br>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;SerialDate d4 = SerialDate.addMonths(1, SerialDate.addMonths(1, d1));<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(30, d4.getDayOfMonth());<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(7, d4.getMonth());<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(2004, d4.getYYYY());<br>\
+                }<br>
+            </code>
+                These tests are trying to ensure,
+                <ul>
+                    <li>when we add 1 month to the date, it can't go past last day of the month/</li>
+                    <li>When we add 1 month to Feb-28, it should be Mar-28 and not March-31</li>
+                </ul>
+                But the test is neither explicitly showing the test cases or logic to be tested.
+            </li>
+        </ul>
+
+        <h3>Template of a Proper Test:</h3>
+        <span class="codeblockheader"><span class="title">Template of Good Test case</span><span class="lang">Language: Java</span></span>
+        <code class="codeblock">
+            @Test<br>
+            @DisplayName("Appropriate Biz name of function/entity" - "Test Case name" - "Expected Outcome")<br>
+            void functionNameToBeTested_TestCaseName_ExpectedOutcome {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;//Arrange<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;//Act<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;//Assert<br>
+            }<br>
+        </code>
+        <span class="codeblockheader"><span class="title">Sample of Good Test case</span><span class="lang">Language: Java</span></span>
+        <code class="codeblock">
+            @Test<br>
+            @DisplayName("Test Era File Create API - Validation Passed - Download Entry Created")<br>
+            void testerafilecreate_whenValidDetailsPassed_createDBEntry() throws Exception {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;//Arrange - Create Data<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;UUID uuid = UUID.randomUUID();<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;String createPayload = "{\"filename\":\"TestFile\",\"filesource\":\"optumpay\",\"creator\":\"claimtracking\"}";<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;RequestBuilder requestBuilder = getRequestBuilder(createPayload);<br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;//Arrange - Mocks<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;when(downloadsCatalogService.createERADownloadEntry(eraDownloadCatalogCreateRequestDTO)).thenReturn(uuid);<br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp; //Act<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();<br><br>
+        
+                &nbsp;&nbsp;&nbsp;&nbsp;//Assert<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Assertions.assertEquals(HttpStatus.CREATED.value(), <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mvcResult.getResponse().getStatus(), <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Incorrect HTTP Status Code(" + mvcResult.getResponse().getStatus() + ") returned"<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;);<br>
+            }<br><br><br>
+        
+            private static RequestBuilder getRequestBuilder(String createPayload) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1/downloadscatalog/eras/create")<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.contentType(MediaType.APPLICATION_JSON)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.accept(MediaType.APPLICATION_JSON)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.content(createPayload);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return requestBuilder;<br>
+            }<br>
+        </code>
+    </body>
+</html>
