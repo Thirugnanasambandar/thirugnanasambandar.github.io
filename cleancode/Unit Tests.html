@@ -65,17 +65,17 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;SerialDate d2 = SerialDate.addMonths(1, d1);<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(30, d2.getDayOfMonth());<br> 
                 &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(6, d2.getMonth()); <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(2004, d2.getYYYY());<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(2004, d2.getYYYY());<br><br>
                 
                 &nbsp;&nbsp;&nbsp;&nbsp;SerialDate d3 = SerialDate.addMonths(2, d1);<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(31, d3.getDayOfMonth());<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(7, d3.getMonth());<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(2004, d3.getYYYY());<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(2004, d3.getYYYY());<br><br>
                 
                 &nbsp;&nbsp;&nbsp;&nbsp;SerialDate d4 = SerialDate.addMonths(1, SerialDate.addMonths(1, d1));<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(30, d4.getDayOfMonth());<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(7, d4.getMonth());<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(2004, d4.getYYYY());<br>\
+                &nbsp;&nbsp;&nbsp;&nbsp;assertEquals(2004, d4.getYYYY());<br>
                 }<br>
             </code>
                 These tests are trying to ensure,
